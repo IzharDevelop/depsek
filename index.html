@@ -2,103 +2,16 @@
 <html>
 <head>
     <title>Chatbot UI</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-        #chat-container {
-            width: 400px;
-            margin: 0 auto;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
-        #chat-log {
-            height: 200px;
-            overflow-y: scroll;
-            padding: 5px;
-        }
-        .message {
-            margin-bottom: 5px;
-        }
-        .user {
-            text-align: right;
-            color: blue; /* Contoh styling untuk user */
-        }
-        .bot {
-            text-align: left;
-            color: green; /* Contoh styling untuk bot */
-        }
-        #user-input {
-            width: 100%;
-            padding: 5px;
-            margin-top: 10px;
-        }
-    </style>
-</head>
+    <link rel="stylesheet" href="style.css"> </head>
 <body>
-
-<div id="chat-container">
-    <div id="chat-log">
+    <div id="chat-container">
+        <div id="chat-log">
+            </div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Ketik pesan Anda...">
+            <button id="send-button">Kirim</button>
         </div>
-    <input type="text" id="user-input" placeholder="Ketik pesan Anda...">
-    <button onclick="sendMessage()">Kirim</button>
-</div>
-
-<script>
-    const chatLog = document.getElementById('chat-log');
-    const userInput = document.getElementById('user-input');
-
-    function sendMessage() {
-        const message = userInput.value;
-        if (message.trim() === "") return; // Jangan kirim pesan kosong
-
-        displayMessage(message, 'user'); // Tampilkan pesan user
-
-        // Simulasi respon bot (ganti dengan logika API sebenarnya)
-        setTimeout(() => {
-            const botResponse = getBotResponse(message); // Fungsi untuk mendapatkan respon dari bot
-            displayMessage(botResponse, 'bot');
-        }, 500); // Delay simulasi
-
-        userInput.value = ''; // Kosongkan input
-    }
-
-
-    function displayMessage(message, sender) {
-      const messageDiv = document.createElement('div');
-      messageDiv.classList.add('message', sender);
-      messageDiv.textContent = message;
-      chatLog.appendChild(messageDiv);
-      chatLog.scrollTop = chatLog.scrollHeight; // Scroll ke bawah
-    }
-
-    function getBotResponse(userMessage) {
-        // Logika untuk mendapatkan respon dari bot berdasarkan userMessage
-        // Ini adalah simulasi, Anda perlu mengintegrasikan dengan API Ollama di sini.
-        // Contoh:
-        // fetch(`${config.models[0].apiBase}/v1/chat/completions`, { ... })
-        //     .then(response => response.json())
-        //     .then(data => { return data.choices[0].message.content });
-
-        // Contoh respon statis (hanya untuk demo)
-        const responses = [
-          "Halo!",
-          "Bagaimana kabarmu?",
-          "Saya adalah bot sederhana.",
-          "Apa yang bisa saya bantu?"
-        ];
-        const randomIndex = Math.floor(Math.random() * responses.length);
-        return responses[randomIndex];
-    }
-
-    // Event listener untuk tombol Enter
-    userInput.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            sendMessage();
-        }
-    });
-
-</script>
-
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
